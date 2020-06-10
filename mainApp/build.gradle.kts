@@ -5,8 +5,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
     repositories {
         jcenter()
+        maven(url = "https://repo.spring.io/milestone")
         mavenCentral()
         mavenLocal()
+
     }
     dependencies {
         classpath(Libs.kotlin_stdlib)
@@ -17,6 +19,7 @@ buildscript {
 
 repositories {
     jcenter()
+    maven(url = "https://repo.spring.io/milestone")
     mavenCentral()
     mavenLocal()
     maven(url = "https://dl.bintray.com/konform-kt/konform")
@@ -25,7 +28,7 @@ repositories {
 plugins {
     java
     kotlin("jvm")
-    id("org.springframework.boot") version "2.3.0.RELEASE"
+    id("org.springframework.boot") version "2.3.0.M1"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     kotlin("plugin.spring") version "1.3.72"
 }
@@ -71,7 +74,6 @@ dependencies {
     // spring
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
