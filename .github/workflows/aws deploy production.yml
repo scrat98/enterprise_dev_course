@@ -24,8 +24,8 @@
 #    and best practices on handling the access key credentials.
 
 on:
-  release:
-    types: [created]
+  push:
+    branches: [ master ]
 
 name: Deploy to Amazon ECS
 
@@ -61,8 +61,6 @@ jobs:
           # be deployed to ECS.
           ./buildImage.sh $IMAGE_TAG
           ./pushImage.sh $IMAGE_TAG
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
       - name: Fill in the new image ID in the Amazon ECS task definition
