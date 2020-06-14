@@ -1,9 +1,15 @@
 #!/bin/bash
 set -e
 
+imageTag=$1
+if [ -z "$1" ]
+  then
+    echo No image tag provided. latest will be used
+    imageTag=latest
+fi
+
 repositoryName=613445080628.dkr.ecr.us-east-2.amazonaws.com/mainapp
-tag=latest
-imageFullName=$repositoryName:$tag
+imageFullName=$repositoryName:$imageTag
 
 echo [Main App STARTING] building $imageFullName...
 
