@@ -5,7 +5,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
     repositories {
         jcenter()
-        maven(url = "https://repo.spring.io/milestone")
         mavenCentral()
         mavenLocal()
 
@@ -17,22 +16,18 @@ buildscript {
     }
 }
 
-
-
 repositories {
     jcenter()
-    maven(url = "https://repo.spring.io/milestone")
     mavenCentral()
     mavenLocal()
-    maven(url = "https://dl.bintray.com/konform-kt/konform")
 }
 
 plugins {
     java
     kotlin("jvm")
-    id("org.springframework.boot") version "2.3.0.M1"
-    id("io.spring.dependency-management") version "1.0.9.RELEASE"
-    kotlin("plugin.spring") version "1.3.72"
+    id("org.springframework.boot") version Vers.springBoot
+    id("io.spring.dependency-management") version Vers.springDependencyVersion
+    kotlin("plugin.spring") version Global.kotlin
 }
 
 subprojects {
@@ -46,7 +41,6 @@ subprojects {
         jcenter()
         mavenCentral()
         mavenLocal()
-        maven(url = "https://dl.bintray.com/konform-kt/konform")
     }
 
     tasks {

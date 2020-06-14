@@ -10,9 +10,9 @@ fi
 repositoryName=613445080628.dkr.ecr.us-east-2.amazonaws.com/mainapp
 imageFullName=$repositoryName:$imageTag
 
-echo [Main app STARTING] building $imageFullName...
+echo [Main app STARTING] pushing image $imageFullName...
 
 echo [Main app] pushing image...
 docker push $imageFullName
 
-echo [Main app FINISHED]
+echo [Main app FINISHED] image $imageFullName pushed
