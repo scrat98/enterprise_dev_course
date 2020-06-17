@@ -1,4 +1,4 @@
-package ru.stringconcat.devCourse.mainApp
+package com.stringconcat.devCourse.mainApp
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

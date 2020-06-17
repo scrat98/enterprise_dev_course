@@ -18,5 +18,5 @@ fun envConfig() = object : ReadOnlyProperty<Any?, String?> {
 }
 
 subprojects {
-    group = "ru.stringconcat"
+    group = "com.stringconcat"
 }

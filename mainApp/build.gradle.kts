@@ -31,7 +31,7 @@ plugins {
 }
 
 subprojects {
-    group = "ru.stringconcat.mainApp"
+    group = "com.stringconcat.mainApp"
 
     apply {
         plugin("java")
