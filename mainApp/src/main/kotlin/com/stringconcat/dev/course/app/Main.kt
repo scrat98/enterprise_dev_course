@@ -1,4 +1,4 @@
-package com.stringconcat.devCourse.mainApp
+package com.stringconcat.dev.course.app
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
