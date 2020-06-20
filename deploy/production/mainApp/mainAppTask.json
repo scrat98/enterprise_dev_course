@@ -59,12 +59,12 @@
   ],
   "placementConstraints": [],
   "memory": "512",
-  "taskRoleArn": "arn:aws:iam::613445080628:role/ecsTaskExecutionRole",
+  "taskRoleArn": null,
   "compatibilities": [
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-2:613445080628:task-definition/first-run-task-definition:14",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-2:613445080628:task-definition/first-run-task-definition:5",
   "family": "first-run-task-definition",
   "requiresAttributes": [
     {
@@ -101,12 +101,6 @@
       "targetId": null,
       "targetType": null,
       "value": null,
-      "name": "com.amazonaws.ecs.capability.task-iam-role"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "ecs.capability.execution-role-ecr-pull"
     },
     {
@@ -128,7 +122,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 14,
+  "revision": 5,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
