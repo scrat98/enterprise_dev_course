@@ -37,7 +37,7 @@
       "memoryReservation": 256,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "613445080628.dkr.ecr.us-east-2.amazonaws.com/mainapp:2.0",
+      "image": "613445080628.dkr.ecr.us-east-2.amazonaws.com/mainapp:latest",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
