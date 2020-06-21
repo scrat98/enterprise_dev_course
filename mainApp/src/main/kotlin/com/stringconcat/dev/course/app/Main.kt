@@ -18,6 +18,6 @@ class MainController {
 
     @GetMapping(path = ["/"])
     fun helloThere(): String {
-        return """{"message": "HelloThere"}"""
+        return """{"message": "We are deploying it"}"""
     }
 }
