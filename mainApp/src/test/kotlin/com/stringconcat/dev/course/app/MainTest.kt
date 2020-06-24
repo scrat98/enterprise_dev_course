@@ -20,6 +20,6 @@ class MainTest {
             .andExpect { status { is2xxSuccessful } }
             .andReturn()
             .response.contentAsString
-            .apply { contains("""{"message": "Hello world"}""") }
+            .apply { contains("""{"message": "We are deploying it"}""") }
     }
 }
