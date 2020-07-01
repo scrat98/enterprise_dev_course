@@ -36,26 +36,30 @@ detekt {
     config = files("${project.parent?.projectDir}/detekt/config.yml")
     buildUponDefaultConfig = true
 }
-//
-//tasks.test {
-//    useJUnitPlatform()
-//    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
-//    finalizedBy(tasks.jacocoTestCoverageVerification) // report is always generated after tests run
-//}
-//
-//tasks.jacocoTestCoverageVerification {
-//    violationRules {
-//        rule {
-//            limit {
-//                minimum = "0.4".toBigDecimal()
-//            }
-//        }
-//    }
-//}
-//
-//tasks.jacocoTestReport {
-//    dependsOn(tasks.test) // tests are required to run before generating the report
-//}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.4".toBigDecimal()
+            }
+        }
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+    finalizedBy(tasks.jacocoTestCoverageVerification)
+}
+
+
+
+
 
 
 dependencies {
