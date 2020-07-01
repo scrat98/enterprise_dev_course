@@ -1,5 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
@@ -28,40 +26,38 @@ plugins {
     id("org.springframework.boot") version Vers.springBoot
     id("io.spring.dependency-management") version Vers.springDependencyVersion
     kotlin("plugin.spring") version Global.kotlin
+    id("io.gitlab.arturbosch.detekt") version Vers.detektVersion
+    jacoco
 }
 
-subprojects {
-    group = "com.stringconcat.app"
 
-    apply {
-        plugin("java")
-    }
 
-    repositories {
-        jcenter()
-        mavenCentral()
-        mavenLocal()
-    }
-
-    tasks {
-        withType<KotlinCompile> {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-        withType<Test> {
-            useJUnitPlatform()
-
-            maxParallelForks = 10
-
-            testLogging {
-                events(TestLogEvent.PASSED, TestLogEvent.FAILED, TestLogEvent.SKIPPED)
-                showStandardStreams = true
-                exceptionFormat = TestExceptionFormat.FULL
-            }
-        }
-    }
+detekt {
+    config = files("${project.parent?.projectDir}/detekt/config.yml")
+    buildUponDefaultConfig = true
 }
+//
+//tasks.test {
+//    useJUnitPlatform()
+//    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+//    finalizedBy(tasks.jacocoTestCoverageVerification) // report is always generated after tests run
+//}
+//
+//tasks.jacocoTestCoverageVerification {
+//    violationRules {
+//        rule {
+//            limit {
+//                minimum = "0.4".toBigDecimal()
+//            }
+//        }
+//    }
+//}
+//
+//tasks.jacocoTestReport {
+//    dependsOn(tasks.test) // tests are required to run before generating the report
+//}
+
+
 dependencies {
     // kotlin
     implementation(kotlin("stdlib-jdk8"))
@@ -73,10 +69,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
 
 val compileKotlin: KotlinCompile by tasks
