@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
 class MainController {
 
     @GetMapping(path = ["/"])
-    //@Suppress("FunctionOnlyReturningConstant")
+    @Suppress("FunctionOnlyReturningConstant")
     fun helloThere(): String {
         return """{"message": "We are deploying it"}"""
     }
