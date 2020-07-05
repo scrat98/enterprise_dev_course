@@ -1,5 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
@@ -28,40 +26,42 @@ plugins {
     id("org.springframework.boot") version Vers.springBoot
     id("io.spring.dependency-management") version Vers.springDependencyVersion
     kotlin("plugin.spring") version Global.kotlin
+    id("io.gitlab.arturbosch.detekt") version Vers.detektVersion
+    jacoco
 }
 
-subprojects {
-    group = "com.stringconcat.app"
 
-    apply {
-        plugin("java")
-    }
 
-    repositories {
-        jcenter()
-        mavenCentral()
-        mavenLocal()
-    }
+detekt {
+    config = files("${project.parent?.projectDir}/detekt/config.yml")
+    buildUponDefaultConfig = true
+}
 
-    tasks {
-        withType<KotlinCompile> {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-        withType<Test> {
-            useJUnitPlatform()
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+}
 
-            maxParallelForks = 10
-
-            testLogging {
-                events(TestLogEvent.PASSED, TestLogEvent.FAILED, TestLogEvent.SKIPPED)
-                showStandardStreams = true
-                exceptionFormat = TestExceptionFormat.FULL
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.4".toBigDecimal()
             }
         }
     }
 }
+
+tasks.test {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+    finalizedBy(tasks.jacocoTestCoverageVerification)
+}
+
+
+
+
+
+
 dependencies {
     // kotlin
     implementation(kotlin("stdlib-jdk8"))
@@ -73,10 +73,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
 
 val compileKotlin: KotlinCompile by tasks
