@@ -18,8 +18,7 @@ class MainTest {
     fun `when call main page hello should be shown`() {
         mockMvc.get("/")
             .andExpect { status { is2xxSuccessful } }
+            .andExpect { content { string("""{"message": "We are deploying it"}""") } }
             .andReturn()
-            .response.contentAsString
-            .apply { contains("""{"message": "We are deploying it"}""") }
     }
 }
